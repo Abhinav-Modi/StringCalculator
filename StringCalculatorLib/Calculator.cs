@@ -49,7 +49,7 @@ namespace StringCalculatorLib
 
         private static string GetDelimiterPart(string input, int delimiterEndIndex)
         {
-            //skips the "//" characters and part after the delimiter
+            // Skips the "//" characters and part after the delimiter
             return input.Substring(2, delimiterEndIndex - 2);
         }
 
@@ -77,14 +77,25 @@ namespace StringCalculatorLib
 
         private static int SumNumbers(IEnumerable<string> numbersAsStrings)
         {
-            return numbersAsStrings
-                .Select(numberString => int.TryParse(numberString, out int number) && IsValidNumber(number) ? number : 0)
-                .Sum();
+            var numbers = numbersAsStrings
+                .Select(numberString => int.TryParse(numberString, out int number) ? number : 0)
+                .ToList();
+
+            ValidateNumbers(numbers);
+
+            return numbers.Where(IsValidNumber).Sum();
+        }
+
+        private static void ValidateNumbers(IEnumerable<int> numbers)
+        {
+            foreach (var number in numbers)
+            {
+                ValidateNumber(number);
+            }
         }
 
         private static bool IsValidNumber(int number)
         {
-            ValidateNumber(number);
             return number <= 1000;
         }
 
