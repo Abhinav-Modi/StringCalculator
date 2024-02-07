@@ -6,18 +6,26 @@ namespace StringCalculatorLib.test
     public class ClaculatorTests
     {
         [Theory]
-        [InlineData("1,2", 3)]
-        [InlineData("1\n2,3", 6)]
-        [InlineData("2,1001", 2)]
-        [InlineData("//;\n1;2", 3)]
-        [InlineData("//[***]\n1***2***3", 6)]
-        [InlineData("//[*][%]\n1*2%3", 6)]
+        [ClassData(typeof(CalculatorTestData))]
         public void GivenNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers(string input, int expectedResult)
         {
-            int actualResult = Calculator.Add(input);
+            var actualResult = Calculator.Add(input);
 
             Assert.Equal(expectedResult, actualResult);
         }
+        //[Theory]
+        //[InlineData("1,2", 3)]
+        //[InlineData("1\n2,3", 6)]
+        //[InlineData("2,1001", 2)]
+        //[InlineData("//;\n1;2", 3)]
+        //[InlineData("//[***]\n1***2***3", 6)]
+        //[InlineData("//[*][%]\n1*2%3", 6)]
+        //public void GivenNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers(string input, int expectedResult)
+        //{
+        //    int actualResult = Calculator.Add(input);
+
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
         //[Fact]
         //public void GivenEmptyStringInput_WhenAddIsCalled_ThenResultShouldBeZero()
         //{
