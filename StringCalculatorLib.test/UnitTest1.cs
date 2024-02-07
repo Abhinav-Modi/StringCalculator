@@ -14,7 +14,7 @@ namespace StringCalculatorLib.test
         [InlineData("//[*][%]\n1*2%3", 6)]
         public void GivenNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers(string input, int expectedResult)
         {
-            var actualResult = Calculator.Add(input);
+            int actualResult = Calculator.Add(input);
 
             Assert.Equal(expectedResult, actualResult);
         }
