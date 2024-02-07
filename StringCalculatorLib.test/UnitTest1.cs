@@ -6,13 +6,21 @@ namespace StringCalculatorLib.test
     public class ClaculatorTests
     {
         [Theory]
-        [ClassData(typeof(CalculatorTestData))]
-        public void GivenNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers(string input, int expectedResult)
+        [CsvData(@"C:\Users\x6abmodi\Documents\CalculatorInputData.csv", true)]
+        public void GivenNumbersFromCsvFile_WhenAddIsCalled_ThenResultShouldBeCorrect(string input, int expectedResult)
         {
             var actualResult = Calculator.Add(input);
 
             Assert.Equal(expectedResult, actualResult);
         }
+        //[Theory]
+        //[ClassData(typeof(CalculatorTestData))]
+        //public void GivenNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers(string input, int expectedResult)
+        //{
+        //    var actualResult = Calculator.Add(input);
+
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
         //[Theory]
         //[InlineData("1,2", 3)]
         //[InlineData("1\n2,3", 6)]
