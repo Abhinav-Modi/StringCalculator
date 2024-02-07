@@ -3,102 +3,115 @@ using Xunit;
 
 namespace StringCalculatorLib.test
 {
-    public class UnitTest1
+    public class ClaculatorTests
     {
-        [Fact]
-        public void GivenEmptyStringInput_WhenAddIsCalled_ThenResultShouldBeZero()
+        [Theory]
+        [InlineData("1,2", 3)]
+        [InlineData("1\n2,3", 6)]
+        [InlineData("2,1001", 2)]
+        [InlineData("//;\n1;2", 3)]
+        [InlineData("//[***]\n1***2***3", 6)]
+        [InlineData("//[*][%]\n1*2%3", 6)]
+        public void GivenNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers(string input, int expectedResult)
         {
-            string input = "";
-            int expectedResult = 0;
-
             var actualResult = Calculator.Add(input);
 
             Assert.Equal(expectedResult, actualResult);
         }
+        //[Fact]
+        //public void GivenEmptyStringInput_WhenAddIsCalled_ThenResultShouldBeZero()
+        //{
+        //    string input = "";
+        //    int expectedResult = 0;
 
-        [Fact]
-        public void GivenSingleNumberStringInput_WhenAddIsCalled_ThenResultShouldBeNumber()
-        {
-            string input = "1";
-            int expectedResult = 1;
+        //    var actualResult = Calculator.Add(input);
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenSingleNumberStringInput_WhenAddIsCalled_ThenResultShouldBeNumber()
+        //{
+        //    string input = "1";
+        //    int expectedResult = 1;
 
-        [Fact]
-        public void GivenTwoNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
-        {
-            string input = "1,2";
-            int expectedResult = 3;
+        //    var actualResult = Calculator.Add(input);
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenTwoNumbersSeparatedByDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
+        //{
+        //    string input = "1,2";
+        //    int expectedResult = 3;
 
-        [Fact]
-        public void GivenNegativeValueInStringInput_WhenAddIsCalled_ThenExceptionShouldBeThrown()
-        {
-            string input = "-1,2";
+        //    var actualResult = Calculator.Add(input);
 
-            Assert.Throws<ArgumentException>(() => Calculator.Add(input));
-        }
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-        [Fact]
-        public void GivenNumbersSeparatedByNewline_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
-        {
-            string input = "1\n2,3";
-            int expectedResult = 6;
+        //[Fact]
+        //public void GivenNegativeValueInStringInput_WhenAddIsCalled_ThenExceptionShouldBeThrown()
+        //{
+        //    string input = "-1,2";
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Throws<ArgumentException>(() => Calculator.Add(input));
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenNumbersSeparatedByNewline_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
+        //{
+        //    string input = "1\n2,3";
+        //    int expectedResult = 6;
 
-        [Fact]
-        public void GivenNumberAbove1000_WhenAddIsCalled_ThenResultShouldExcludeNumber()
-        {
-            string input = "2,1001";
-            int expectedResult = 2;
+        //    var actualResult = Calculator.Add(input);
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenNumberAbove1000_WhenAddIsCalled_ThenResultShouldExcludeNumber()
+        //{
+        //    string input = "2,1001";
+        //    int expectedResult = 2;
 
-        [Fact]
-        public void GivenDifferentDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
-        {
-            string input = "//;\n1;2";
-            int expectedResult = 3;
+        //    var actualResult = Calculator.Add(input);
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenDifferentDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
+        //{
+        //    string input = "//;\n1;2";
+        //    int expectedResult = 3;
 
-        [Fact]
-        public void GivenAnyLengthOfDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
-        {
-            string input = "//[***]\n1***2***3";
-            int expectedResult = 6;
+        //    var actualResult = Calculator.Add(input);
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenAnyLengthOfDelimiter_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
+        //{
+        //    string input = "//[***]\n1***2***3";
+        //    int expectedResult = 6;
 
-        [Fact]
-        public void GivenMultipleDelimiters_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
-        {
-            string input = "//[*][%]\n1*2%3";
-            int expectedResult = 6;
+        //    var actualResult = Calculator.Add(input);
 
-            var actualResult = Calculator.Add(input);
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+        //[Fact]
+        //public void GivenMultipleDelimiters_WhenAddIsCalled_ThenResultShouldBeSumOfNumbers()
+        //{
+        //    string input = "//[*][%]\n1*2%3";
+        //    int expectedResult = 6;
+
+        //    var actualResult = Calculator.Add(input);
+
+        //    Assert.Equal(expectedResult, actualResult);
+        //}
     }
 }
